@@ -21,8 +21,7 @@ discover the policy through a DNS record and fetch it over HTTPS from `mta-sts.<
 
    - `docs/CNAME`, a single line: `mta-sts.<your domain>`
    - `docs/.nojekyll`, empty. Without it Pages does not publish `.well-known`.
-2. In the repository settings, enable GitHub Pages from the `docs/` folder of `main`.
-3. Add two DNS records. If your DNS provider can proxy records, leave the CNAME unproxied
+2. Add two DNS records. If your DNS provider can proxy records, leave the CNAME unproxied
    so GitHub can issue the certificate.
 
    | Type | Name | Value |
@@ -30,6 +29,8 @@ discover the policy through a DNS record and fetch it over HTTPS from `mta-sts.<
    | CNAME | `mta-sts.<your domain>` | `<owner>.github.io` |
    | TXT | `_mta-sts.<your domain>` | `v=STSv1; id=<any new value, such as a timestamp>` |
 
+3. Once the CNAME resolves, enable GitHub Pages from the `docs/` folder of `main` in the
+   repository settings. Pages checks DNS when it is enabled, so the record must exist first.
 4. When Pages shows the certificate as issued, turn on **Enforce HTTPS** and check that
    the policy URL loads.
 5. `testing` mode only reports problems. To receive the reports, add a TXT record at
